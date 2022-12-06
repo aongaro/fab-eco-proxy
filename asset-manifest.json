@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/fab-eco-proxy/static/css/main.c02b9829.css",
-    "main.js": "/fab-eco-proxy/static/js/main.94ecb566.js",
+    "main.css": "/fab-eco-proxy/static/css/main.73d50a06.css",
+    "main.js": "/fab-eco-proxy/static/js/main.2728a0b8.js",
     "static/js/787.a8ff425a.chunk.js": "/fab-eco-proxy/static/js/787.a8ff425a.chunk.js",
     "static/media/pitch-3.png": "/fab-eco-proxy/static/media/pitch-3.c5914a82d2db6b7214d6.png",
     "static/media/pitch-2.png": "/fab-eco-proxy/static/media/pitch-2.95e87600e34486b7ca77.png",
     "static/media/pitch-1.png": "/fab-eco-proxy/static/media/pitch-1.aaae6be09971500e0ae5.png",
     "index.html": "/fab-eco-proxy/index.html",
-    "main.c02b9829.css.map": "/fab-eco-proxy/static/css/main.c02b9829.css.map",
-    "main.94ecb566.js.map": "/fab-eco-proxy/static/js/main.94ecb566.js.map",
+    "main.73d50a06.css.map": "/fab-eco-proxy/static/css/main.73d50a06.css.map",
+    "main.2728a0b8.js.map": "/fab-eco-proxy/static/js/main.2728a0b8.js.map",
     "787.a8ff425a.chunk.js.map": "/fab-eco-proxy/static/js/787.a8ff425a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c02b9829.css",
-    "static/js/main.94ecb566.js"
+    "static/css/main.73d50a06.css",
+    "static/js/main.2728a0b8.js"
   ]
 }
