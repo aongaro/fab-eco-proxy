@@ -1,0 +1,72 @@
+@media only print {
+	body {
+	  min-width: 300px !important;
+	  max-width: 100% !important;
+	  -webkit-print-color-adjust:exact !important;
+	print-color-adjust:exact !important;
+	}
+	.container {
+	  min-width: 300px !important;
+	  max-width: 100% !important;
+	}
+	html, body {
+	  height: auto;
+	  margin: 0;
+	}
+	@page {
+		size: auto !important;
+		margin-top: 0.25in;
+		margin-left: 0.25in;
+		margin-bottom: 0;
+		margin-right: 0;
+		-webkit-print-color-adjust:exact !important;
+	  print-color-adjust:exact !important;
+	  }
+	  .App-header {
+		display: none;
+		min-height: 0;
+	  }
+	  .card-search {
+		display: none;
+	  }
+	  .no-print {
+		display: none;
+	  }
+	  .title {
+		display: none;
+	  }
+	  .main {
+		margin-top: 0;
+	  }
+	  .card-list .fab-card {
+		margin: 0;
+		padding: 0;
+		/* height: 3.4375in;
+		width: 2.4375in;
+		width: 235px;
+		height: 329px; */
+		border: none;
+		page-break-inside: avoid;
+		display:inline-block;
+		
+	  }
+	  .card-list .fab-card>.dis {
+		/* width: 2.4375in;
+		height: 3.4375in; */
+		width: 235px;
+		  height: 329px;
+		margin: 0;
+		display:inline-block;
+		border: 1px solid grey;
+		vertical-align: bottom;
+	  }
+	  .card-list {
+		margin: 0;
+		padding: 0;
+		font-size: 0;
+		text-align: left;
+	  }
+	  .fab-card.card {
+		background-color: transparent;
+	  }
+  }
