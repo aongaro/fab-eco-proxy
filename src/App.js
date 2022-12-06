@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Card,
   Button,
   Col,
@@ -15,6 +16,8 @@ import "./print.css";
 import FABCard from "./FABCard";
 import sortBy from "lodash/sortBy";
 import FABCardSearch from "./FABCardSearch";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [cardsToPrint, setCardsToPrint] = useState([]);
@@ -23,6 +26,7 @@ function App() {
     setCardsToPrint((prev) => {
       return sortBy([...prev, card], [(card) => card["Name"]]);
     });
+    toast.success("Card added!");
   };
   const removeCardToPrint = (index) => {
     setCardsToPrint((prev) => {
@@ -32,11 +36,23 @@ function App() {
     });
   };
 
-  const [showSearchModal, setShowSearchModal] = useState(true);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [showKofi, setShowKofi] = useState(false);
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Container className="App">
         <Navbar
           bg="dark"
@@ -127,6 +143,29 @@ function App() {
             </p>
           </Modal.Body>
         </Modal>
+        {cardsToPrint.length > 0 && (
+          <Alert variant="info" className="no-print" style={{ marginTop: 60 }}>
+            <div className="d-flex ">
+              <div style={{ flex: 1 }}>
+                You added {cardsToPrint.length} cards.{" "}
+              </div>
+              <div className="d-flex justify-content-end"></div>
+              <Button
+                variant="primary"
+                onClick={() => window.print()}
+                style={{ marginRight: 10 }}
+              >
+                Print
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => setShowSearchModal(true)}
+              >
+                Add cards
+              </Button>
+            </div>
+          </Alert>
+        )}
         <Row className="main">
           <Col>
             <div className="card-list">
@@ -142,7 +181,23 @@ function App() {
             {cardsToPrint.length === 0 && (
               <Card style={{ width: "100%" }}>
                 <Card.Body>
-                  <Card.Text>Start adding card to the print list.</Card.Text>
+                  <Card.Text>Start adding cards to the print list.</Card.Text>
+                  <Card.Text style={{ textAlign: "left" }}>
+                    <h3>Usage</h3>
+
+                    <ol>
+                      <li>Click "Add Cards"</li>
+                      <li>Enter card names in the search field</li>
+                      <li>Click "Add" on the cards you wish to print</li>
+                      <li>
+                        Exit the modal and eventually adjust card quantities
+                      </li>
+                      <li>
+                        Print using your browsers print fuctionality (landscape
+                        for US Letter, portrait for A4) or click "Print"
+                      </li>
+                    </ol>
+                  </Card.Text>
                   <Button
                     variant="primary"
                     onClick={() => setShowSearchModal(true)}
@@ -158,7 +213,7 @@ function App() {
       <Container className="no-print bg-light text-muted mt-2">
         <footer className="p-5">
           <Row>
-            <Col md="4">
+            <Col md="6">
               A special thanks to
               <ul>
                 <li>
@@ -173,7 +228,7 @@ function App() {
                 </li>
               </ul>
             </Col>
-            <Col md="8">
+            <Col md="6">
               <p>If you liked this project (which is totally free), you can:</p>
               <Button variant="dark" onClick={() => setShowKofi(true)}>
                 Support me
