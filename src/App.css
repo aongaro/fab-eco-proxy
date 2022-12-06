@@ -19,6 +19,7 @@ code {
 .card-search .fab-card {
   font-size: 12px;
   /* width: 162px; */
+  width: 100%;
 }
 
 .card-search .card-body {
