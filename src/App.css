@@ -60,6 +60,11 @@ code {
   width: 100%;
 }
 
+.main {
+  margin-top: 60px;
+  text-align: center;
+}
+
 .circle {
   display:inline-block;
   height: 10px;

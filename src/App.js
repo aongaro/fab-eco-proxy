@@ -140,7 +140,7 @@ function App() {
               ))}
             </div>
             {cardsToPrint.length === 0 && (
-              <Card style={{ width: "18rem" }}>
+              <Card style={{ width: "100%" }}>
                 <Card.Body>
                   <Card.Text>Start adding card to the print list.</Card.Text>
                   <Button
