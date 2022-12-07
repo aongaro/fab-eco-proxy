@@ -18,9 +18,26 @@ import sortBy from "lodash/sortBy";
 import FABCardSearch from "./FABCardSearch";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { cardDB, cardMap } from "./cardsRepository";
 
 function App() {
-  const [cardsToPrint, setCardsToPrint] = useState([]);
+  const search = window.location.search;
+  const [cardsToPrint, setCardsToPrint] = useState(() => {
+    const res = [];
+    if (search) {
+      const qparams = new URLSearchParams(search);
+      if (qparams.get("id")) {
+        const qres = cardDB.search(qparams.get("id").replaceAll(",", " "));
+        qres.map((r) => {
+          if (cardMap[r.ref]) {
+            res.push({ ...cardMap[r.ref], uuid: uuidv4() });
+          }
+          return r;
+        });
+      }
+    }
+    return res;
+  });
   const addCardToPrint = (card) => {
     card = { ...card, uuid: uuidv4() };
     setCardsToPrint((prev) => {

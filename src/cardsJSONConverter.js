@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const csv = require("csvtojson");
+const lodash = require("lodash");
 
 function getCardText(functionalText) {
   // Now we parse text from csv into somethng we can render as html
@@ -114,10 +115,7 @@ function formatCard(card, cards) {
   result.ability_and_effect_keywords = fixList(
     result.ability_and_effect_keywords
   );
-
-  const id = result.identifiers.join("-");
-  //check if we have a flip card here
-  result.id = cards[id] ? `${id}F` : id;
+  result.id = result.identifiers.join("-");
   const splits = result.image_urls.split(",");
   const imgMatches = splits[0].match(reImage);
   if (imgMatches) {
@@ -146,7 +144,22 @@ async function main() {
     // const raw = await fs.readFile("csvjson.json");
     // const cards = JSON.parse(raw);
     console.log("CONVERTING CSV...");
-    const content = cards.map((card) => formatCard(card, cards));
+    //const content = cards.map((card) => formatCard(card, cards));
+    const content = lodash.reduce(
+      cards,
+      (res, card) => {
+        const formatted = formatCard(card);
+        const idAlreadyInUse = lodash.findIndex(
+          res,
+          (r) => r.id === formatted.id
+        );
+        if (idAlreadyInUse !== -1) {
+          formatted.id = formatted.id + "F";
+        }
+        return [...res, formatted];
+      },
+      []
+    );
     await fs.writeFile("converted.json", JSON.stringify(content));
     console.log("CARDS CONVERTED!");
   } catch (err) {
