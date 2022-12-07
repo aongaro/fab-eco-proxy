@@ -19,6 +19,7 @@ import FABCardSearch from "./FABCardSearch";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { cardDB, cardMap } from "./cardsRepository";
+import reduce from "lodash/reduce";
 
 function App() {
   const search = window.location.search;
@@ -28,15 +29,36 @@ function App() {
       const qparams = new URLSearchParams(search);
       if (qparams.get("id")) {
         const qres = cardDB.search(qparams.get("id").replaceAll(",", " "));
+        const values = qparams.get("id").split(",");
+        const idCountMap = reduce(
+          values,
+          (acc, id) => {
+            if (!acc[id]) {
+              return { ...acc, [id]: 1 };
+            }
+            return { ...acc, [id]: acc[id] + 1 };
+          },
+          {}
+        );
+        const countMapKeys = Object.keys(idCountMap);
         qres.map((r) => {
           if (cardMap[r.ref]) {
-            res.push({ ...cardMap[r.ref], uuid: uuidv4() });
+            let found = false;
+            for (let i = 0; i < countMapKeys.length && !found; i++) {
+              if (r.ref.includes(countMapKeys[i])) {
+                found = true;
+                const repeat = idCountMap[countMapKeys[i]];
+                for (let j = 0; j < repeat; j++) {
+                  res.push({ ...cardMap[r.ref], uuid: uuidv4() });
+                }
+              }
+            }
           }
           return r;
         });
       }
     }
-    return res;
+    return sortBy(res, [(card) => card.name]);
   });
   const addCardToPrint = (card) => {
     card = { ...card, uuid: uuidv4() };

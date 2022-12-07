@@ -9,4 +9,4 @@ The cards list is a JSON generated from [The Fab Cube](https://github.com/the-fa
 
 # Query params
 
-To pre-fill cards use the query param `?id=FABCARD_ID1,FABCARD_ID2,...,FABCARD_IDn`, where `FABCARD_IDi` is a card collector's number (you can use any reprint collector's number).
+To pre-fill cards use the query param `?id=FABCARD_ID1,FABCARD_ID2,...,FABCARD_IDn`, where `FABCARD_IDi` is a card collector's number (you can use any reprint collector's number). When adding a double-sided card, both sides are added.
