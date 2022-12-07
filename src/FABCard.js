@@ -9,16 +9,16 @@ import Cost from "./cost.png";
 import Pitch1 from "./pitch-1.png";
 import Pitch2 from "./pitch-2.png";
 import Pitch3 from "./pitch-3.png";
-import { getCardTextFromCSV } from "./cardFromCSVUtils";
 import ListGroup from "react-bootstrap/ListGroup";
+import FunctionalText from "./FunctionalText";
 
 function FABCardContent(props) {
-  const { card, text } = props;
+  const { card } = props;
   return (
     <div className="dis" style={{ position: "relative" }}>
       <div className="fab-card-header">
-        {card["Pitch"] !== "" && <div className="pitch-container"></div>}
-        {card["Pitch"] !== "" && card["Pitch"] >= 1 && (
+        {card.pitch !== undefined && <div className="pitch-container"></div>}
+        {card.pitch !== undefined && card.pitch >= 1 && (
           <div
             className="pitch-circle"
             style={{
@@ -28,29 +28,29 @@ function FABCardContent(props) {
             }}
           ></div>
         )}
-        {card["Pitch"] !== "" && (
+        {card.pitch !== undefined && (
           <div
             className="pitch-circle"
             style={{
               left: 6,
               top: 19,
-              backgroundColor: card["Pitch"] > 1 ? "red" : "#fff",
+              backgroundColor: card.pitch > 1 ? "red" : "#fff",
             }}
           ></div>
         )}
-        {card["Pitch"] !== "" && (
+        {card.pitch !== undefined && (
           <div
             className="pitch-circle"
             style={{
               left: 18,
               top: 19,
-              backgroundColor: card["Pitch"] > 2 ? "red" : "#fff",
+              backgroundColor: card.pitch > 2 ? "red" : "#fff",
             }}
           ></div>
         )}
-        {card["Cost"] !== "" && (
+        {card.cost !== undefined && (
           <div className="card-cost">
-            <strong>{card["Cost"]}</strong>
+            <strong>{card.cost}</strong>
           </div>
         )}
 
@@ -58,76 +58,58 @@ function FABCardContent(props) {
           className="card-name"
           style={{
             borderTop:
-              card["Pitch"] !== ""
-                ? card["Pitch"] > 1
-                  ? card["Pitch"] === 2
+              card.pitch !== undefined
+                ? card.pitch > 1
+                  ? card.pitch === 2
                     ? "4px solid yellow"
                     : "4px solid blue"
                   : "4px solid red"
                 : "none",
           }}
         >
-          <strong>{card["Name"]}</strong>
+          <strong>{card.name}</strong>
         </div>
       </div>
       <div className="card-type">
-        <div style={{ padding: 6 }}>{card["Type Text"]}</div>
+        <div style={{ padding: 6 }}>{card.type_text}</div>
       </div>
       <div className="card-stats" style={{ left: 0, borderRight: "1px solid" }}>
-        {card["Power"] !== "" && (
+        {card.power !== undefined && (
           <>
             <img src={Atk} className="card-stats-img mr-3x" alt="Power" />
-            <span>{card["Power"]}</span>
+            <span>{card.power}</span>
           </>
         )}
-        {card["Intelligence"] !== "" && (
+        {card.intelligence !== undefined && (
           <>
             <img src={Intel} className="card-stats-img mr-3x" alt="Intellect" />
-            <span>{card["Intelligence"]}</span>
+            <span>{card.intelligence}</span>
           </>
         )}
       </div>
       <div className="card-stats" style={{ right: 0, borderLeft: "1px solid" }}>
-        {card["Defense"] && (
+        {card.defense !== undefined && (
           <>
-            <span>{card["Defense"]}</span>
+            <span>{card.defense}</span>
             <img src={Def} className="card-stats-img ml-3x" alt="Defense" />
           </>
         )}
-        {card["Health"] && (
+        {card.health !== undefined && (
           <>
-            <span className="mri-3x">{card["Health"]}</span>
+            <span className="mri-3x">{card.health}</span>
             <img src={Life} className="card-stats-img ml-3x" alt="Health" />
           </>
         )}
       </div>
       <div style={{ padding: "8px 4px", borderTop: "1px solid" }}>
-        {text.map((ck, i) => (
-          <div style={{ fontSize: 10, padding: 2 }} key={i}>
-            {ck.map((chunk, i) => {
-              if (chunk.strong)
-                return (
-                  <span key={`ck-${i}`}>
-                    <strong>{chunk.text} </strong>
-                  </span>
-                );
-              if (chunk.italic)
-                return (
-                  <span key={`ck-${i}`}>
-                    <i>{chunk.text} </i>
-                  </span>
-                );
-              return <span key={`ck-${i}`}>{chunk.text} </span>;
-            })}
-          </div>
-        ))}
+        <FunctionalText text={card.functional_text} />
       </div>
     </div>
   );
 }
 
 function FABCardBasic(props) {
-  const { card, text } = props;
+  const { card } = props;
 
   return (
     <ListGroup as="ol">
@@ -136,9 +118,9 @@ function FABCardBasic(props) {
         className="d-flex justify-content-between align-items-start"
         style={{
           borderTop:
-            card["Pitch"] !== ""
-              ? card["Pitch"] > 1
-                ? card["Pitch"] === 2
+            card.pitch !== undefined
+              ? card.pitch > 1
+                ? card.pitch === 2
                   ? "4px solid yellow"
                   : "4px solid blue"
                 : "4px solid red"
@@ -151,7 +133,7 @@ function FABCardBasic(props) {
             height: 32,
           }}
         >
-          {card["Type Text"]}
+          {card.type_text}
         </div>
       </ListGroup.Item>
       <ListGroup.Item
@@ -160,25 +142,7 @@ function FABCardBasic(props) {
         style={{ height: "150px", overflow: "hidden" }}
       >
         <div className="ms-2 me-auto">
-          {text.map((ck, i) => (
-            <div style={{ fontSize: 10, padding: 2 }} key={i}>
-              {ck.map((chunk, i) => {
-                if (chunk.strong)
-                  return (
-                    <span key={`ck-${i}`}>
-                      <strong>{chunk.text} </strong>
-                    </span>
-                  );
-                if (chunk.italic)
-                  return (
-                    <span key={`ck-${i}`}>
-                      <i>{chunk.text} </i>
-                    </span>
-                  );
-                return <span key={`ck-${i}`}>{chunk.text} </span>;
-              })}
-            </div>
-          ))}
+          <FunctionalText text={card.functional_text} />
         </div>
       </ListGroup.Item>
       <ListGroup.Item as="li">
@@ -189,64 +153,64 @@ function FABCardBasic(props) {
             justifyContent: "space-evenly",
           }}
         >
-          {card["Power"] !== "" && (
+          {card.power !== undefined && (
             <div>
               <img src={Atk} className="card-stats-img mr-3x" alt="Power" />
-              <span>{card["Power"]}</span>
+              <span>{card.power}</span>
             </div>
           )}
-          {card["Intelligence"] !== "" && (
+          {card.intelligence !== undefined && (
             <div>
               <img
                 src={Intel}
                 className="card-stats-img mr-3x"
                 alt="Intellect"
               />
-              <span>{card["Intelligence"]}</span>
+              <span>{card.intelligence}</span>
             </div>
           )}
-          {card["Defense"] !== "" && (
+          {card.defense !== undefined && (
             <div>
               <img src={Def} className="card-stats-img mr-3x" alt="Defense" />
-              <span>{card["Defense"]}</span>
+              <span>{card.defense}</span>
             </div>
           )}
-          {card["Health"] !== "" && (
+          {card.health !== undefined && (
             <div>
               <img src={Life} className="card-stats-img mr-3x" alt="Health" />
-              <span>{card["Health"]}</span>
+              <span>{card.health}</span>
             </div>
           )}
-          {card["Cost"] !== "" && (
+          {card.cost !== undefined && (
             <div>
               <img src={Cost} className="card-stats-img mr-3x" alt="Health" />
-              <span>{card["Cost"]}</span>
+              <span>{card.cost}</span>
             </div>
           )}
-          {card["Pitch"] !== "" && (
+          {card.pitch !== undefined && (
             <div>
-              {card["Pitch"] === 1 && (
+              {card.pitch === 1 && (
                 <img
                   src={Pitch1}
                   className="card-stats-img mr-3x"
                   alt="Pitch"
                 />
               )}
-              {card["Pitch"] === 2 && (
+              {card.pitch === 2 && (
                 <img
                   src={Pitch2}
                   className="card-stats-img mr-3x"
                   alt="Pitch"
                 />
               )}
-              {card["Pitch"] === 3 && (
+              {card.pitch === 3 && (
                 <img
                   src={Pitch3}
                   className="card-stats-img mr-3x"
                   alt="Pitch"
                 />
               )}
-              <span>{card["Pitch"]}</span>
+              <span>{card.pitch}</span>
             </div>
           )}
         </div>
@@ -257,16 +221,14 @@ function FABCardBasic(props) {
 
 export default function FABCard(props) {
   const { card, addCardToPrint, removeCardToPrint, fromSearch } = props;
-  const text = getCardTextFromCSV(card);
 
   return (
     <Card className="fab-card">
-      {/* <Card.Img src={imgUrl} /> */}
-      {!fromSearch && <FABCardContent card={card} text={text} />}
-      {fromSearch && <FABCardBasic card={card} text={text} />}
+      {!fromSearch && <FABCardContent card={card} />}
+      {fromSearch && <FABCardBasic card={card} />}
       <Card.Body className="card-info no-print">
-        <Card.Title style={{ fontSize: "1rem" }}>{card["Name"]}</Card.Title>
-        <Card.Text>{"(" + card.ed + ")"}</Card.Text>
+        <Card.Title style={{ fontSize: "1rem" }}>{card.name}</Card.Title>
+        <Card.Text>{"(" + card.set_identifiers + ")"}</Card.Text>
       </Card.Body>
       <Card.Footer className="no-print">
         {addCardToPrint && (

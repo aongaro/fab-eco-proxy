@@ -24,7 +24,7 @@ function App() {
   const addCardToPrint = (card) => {
     card = { ...card, uuid: uuidv4() };
     setCardsToPrint((prev) => {
-      return sortBy([...prev, card], [(card) => card["Name"]]);
+      return sortBy([...prev, card], [(card) => card.name]);
     });
     toast.success("Card added!");
   };
@@ -38,12 +38,11 @@ function App() {
 
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
-  const [showKofi, setShowKofi] = useState(false);
   return (
     <>
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={1200}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -70,33 +69,21 @@ function App() {
               </Nav.Link>
               <Nav.Link onClick={() => window.print()}>Print</Nav.Link>
               <Nav.Link onClick={() => setShowHelpModal(true)}>Help</Nav.Link>
-              <Nav.Link onClick={() => setShowKofi(true)}>Donate</Nav.Link>
             </Nav>
+            <Navbar.Text>
+              <a href="https://ko-fi.com/Q5Q0GUWTY" target="_blank">
+                <img
+                  height="36"
+                  style={{ border: 0, height: 36 }}
+                  src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
+                  border="0"
+                  alt="Buy Me a Coffee at ko-fi.com"
+                />
+              </a>
+            </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>
-        {showKofi && (
-          <Modal
-            show={showKofi}
-            onHide={() => setShowKofi(false)}
-            dialogClassName="search-modal"
-            aria-labelledby="search-modal-title"
-          >
-            <Modal.Body>
-              <iframe
-                id="kofiframe"
-                src="https://ko-fi.com/aongaro/?hidefeed=true&widget=true&embed=true&preview=true"
-                style={{
-                  border: "none",
-                  width: "100%",
-                  padding: "4px",
-                  background: "#f9f9f9",
-                }}
-                height="712"
-                title="aongaro"
-              ></iframe>
-            </Modal.Body>
-          </Modal>
-        )}
+
         <Modal
           show={showSearchModal}
           onHide={() => setShowSearchModal(false)}
@@ -144,7 +131,7 @@ function App() {
           </Modal.Body>
         </Modal>
         {cardsToPrint.length > 0 && (
-          <Alert variant="info" className="no-print" style={{ marginTop: 60 }}>
+          <Alert variant="info" className="no-print" style={{ marginTop: 70 }}>
             <div className="d-flex ">
               <div style={{ flex: 1 }}>
                 You added {cardsToPrint.length} cards.{" "}
@@ -182,7 +169,7 @@ function App() {
               <Card style={{ width: "100%" }}>
                 <Card.Body>
                   <Card.Text>Start adding cards to the print list.</Card.Text>
-                  <Card.Text style={{ textAlign: "left" }}>
+                  <div style={{ textAlign: "left" }}>
                     <h3>Usage</h3>
 
                     <ol>
@@ -197,7 +184,7 @@ function App() {
                         for US Letter, portrait for A4) or click "Print"
                       </li>
                     </ol>
-                  </Card.Text>
+                  </div>
                   <Button
                     variant="primary"
                     onClick={() => setShowSearchModal(true)}
@@ -229,10 +216,22 @@ function App() {
               </ul>
             </Col>
             <Col md="6">
-              <p>If you liked this project (which is totally free), you can:</p>
-              <Button variant="dark" onClick={() => setShowKofi(true)}>
-                Support me
-              </Button>
+              <p>
+                If you liked this project (which is totally free), you can:{" "}
+                <a
+                  href="https://ko-fi.com/Q5Q0GUWTY"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    height="36"
+                    style={{ border: 0, height: 36 }}
+                    src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
+                    border="0"
+                    alt="Buy Me a Coffee at ko-fi.com"
+                  />
+                </a>
+              </p>
             </Col>
           </Row>
           <Row className="border-top py-4">
