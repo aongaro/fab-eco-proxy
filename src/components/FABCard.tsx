@@ -36,6 +36,7 @@ export default function FABCard(props: FABCardProps) {
           <Button
             variant="outline-primary"
             size="sm"
+            style={{ marginRight: 5 }}
             onClick={() => addCardToPrint(card)}
           >
             Add
