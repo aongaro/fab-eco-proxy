@@ -228,7 +228,7 @@ function App() {
         </div>
       </Container>
 
-      <footer className="p-4 mt-3 bg-light" style={{ fontSize: 13 }}>
+      <footer className="p-4 mt-3 bg-light no-print" style={{ fontSize: 13 }}>
         <Row>
           <Col md="6">
             A special thanks to
