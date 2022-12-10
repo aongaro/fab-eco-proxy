@@ -196,7 +196,14 @@ function App() {
               {cardsToPrint.length === 0 && (
                 <Card style={{ width: "100%" }}>
                   <Card.Body>
-                    <Card.Text>Start adding cards to the print list.</Card.Text>
+                    <Card.Text style={{ textAlign: "left" }}>
+                      <strong>FAB ECO Proxy</strong> is an ink-saving proxy
+                      generator for Flesh & Blood™ cards.
+                    </Card.Text>
+                    <Card.Text style={{ textAlign: "left" }}>
+                      You can now test your missing cards before buying without
+                      wasting ink!
+                    </Card.Text>
                     <div style={{ textAlign: "left" }}>
                       <h3>Usage</h3>
 
@@ -228,7 +235,7 @@ function App() {
         </div>
       </Container>
 
-      <footer className="p-4 mt-3 bg-light no-print" style={{ fontSize: 13 }}>
+      <footer className="p-3 mt-3 bg-light no-print" style={{ fontSize: 13 }}>
         <Row>
           <Col md="6">
             A special thanks to
@@ -262,7 +269,7 @@ function App() {
             </p>
           </Col>
         </Row>
-        <Row className="border-top py-4">
+        <Row className="border-top py-2">
           <Col>
             <strong>FAB Eco Proxy</strong> is in no way affiliated with{" "}
             <a href="https://legendstory.com/">Legend Story Studios®</a>. All
