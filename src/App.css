@@ -160,6 +160,12 @@ code {
   align-items: center;
 }
 
+.fab-stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-stats-img { height: 20px; width: 20px; }
 .card-stats-img-small { height: 15px; width: 15px; }
 

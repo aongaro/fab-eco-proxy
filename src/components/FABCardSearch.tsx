@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import FABCard from "./FABCard";
-import { cardDB, cardMap } from "./cardsRepository";
+import { cardDB, cardMap } from "../db/cardDB";
 import { Col, Container, InputGroup, Row } from "react-bootstrap";
+import EcoProxyCard from "../db/interfaces";
+import { Index } from "lunr";
 
-export default function FABCardSearch(props) {
+interface FABCardSearchProps {
+  addCardToPrint: (card: EcoProxyCard) => void;
+}
+
+export default function FABCardSearch(props: FABCardSearchProps) {
   const { addCardToPrint } = props;
   const [searchTerm, setSearchTerm] = useState("fyen");
-  const [results, setResults] = useState([]);
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+  const [results, setResults] = useState<Index.Result[]>([]);
+  const handleChange = (value: string) => {
+    setSearchTerm(value);
   };
 
   useEffect(() => {
@@ -22,21 +28,20 @@ export default function FABCardSearch(props) {
     <div className="card-search">
       <div className="card-search-header">
         <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text>Search For Cards:</InputGroup.Text>
-          </InputGroup.Prepend>
+          <InputGroup.Text>Search For Cards:</InputGroup.Text>
+
           <input
             type="text"
             placeholder="Search"
             value={searchTerm}
-            onChange={handleChange}
+            onChange={(event) => handleChange(event.target.value)}
           />
         </InputGroup>
       </div>
       <Container>
         <Row>
           {results.map((res, i) => (
-            <Col md="3" key={`${cardMap[res.ref].id}${i}`}>
+            <Col md="3" xl="2" key={`${cardMap[res.ref].cardIdentifier}${i}`}>
               <FABCard
                 card={cardMap[res.ref]}
                 addCardToPrint={addCardToPrint}

@@ -13,61 +13,27 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import "./print.css";
-import FABCard from "./FABCard";
+import FABCard from "./components/FABCard";
 import sortBy from "lodash/sortBy";
-import FABCardSearch from "./FABCardSearch";
+import FABCardSearch from "./components/FABCardSearch";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { cardDB, cardMap } from "./cardsRepository";
-import reduce from "lodash/reduce";
+import { cardsFromQueryParamsList } from "./db/cardDB";
+import EcoProxyCard from "./db/interfaces";
+import Logo from "./images/logopng.png";
 
 function App() {
-  const search = window.location.search;
-  const [cardsToPrint, setCardsToPrint] = useState(() => {
-    const res = [];
-    if (search) {
-      const qparams = new URLSearchParams(search);
-      if (qparams.get("id")) {
-        const qres = cardDB.search(qparams.get("id").replaceAll(",", " "));
-        const values = qparams.get("id").split(",");
-        const idCountMap = reduce(
-          values,
-          (acc, id) => {
-            if (!acc[id]) {
-              return { ...acc, [id]: 1 };
-            }
-            return { ...acc, [id]: acc[id] + 1 };
-          },
-          {}
-        );
-        const countMapKeys = Object.keys(idCountMap);
-        qres.map((r) => {
-          if (cardMap[r.ref]) {
-            let found = false;
-            for (let i = 0; i < countMapKeys.length && !found; i++) {
-              if (r.ref.includes(countMapKeys[i])) {
-                found = true;
-                const repeat = idCountMap[countMapKeys[i]];
-                for (let j = 0; j < repeat; j++) {
-                  res.push({ ...cardMap[r.ref], uuid: uuidv4() });
-                }
-              }
-            }
-          }
-          return r;
-        });
-      }
-    }
-    return sortBy(res, [(card) => card.name]);
-  });
-  const addCardToPrint = (card) => {
+  const [cardsToPrint, setCardsToPrint] = useState<EcoProxyCard[]>(() =>
+    cardsFromQueryParamsList("id")
+  );
+  const addCardToPrint = (card: EcoProxyCard) => {
     card = { ...card, uuid: uuidv4() };
     setCardsToPrint((prev) => {
       return sortBy([...prev, card], [(card) => card.name]);
     });
     toast.success("Card added!");
   };
-  const removeCardToPrint = (index) => {
+  const removeCardToPrint = (index: number) => {
     setCardsToPrint((prev) => {
       var cardsCopy = [...prev];
       cardsCopy.splice(index, 1);
@@ -93,34 +59,49 @@ function App() {
       />
       <Container className="App">
         <Navbar
-          bg="dark"
-          variant="dark"
+          variant="light"
           expand="sm"
           fixed="top"
           className="no-print"
+          style={{ backgroundColor: "#CCE2CB" }}
         >
-          <Navbar.Brand>FAB Eco Proxy</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link onClick={() => setShowSearchModal(true)}>
-                Add Cards
-              </Nav.Link>
-              <Nav.Link onClick={() => window.print()}>Print</Nav.Link>
-              <Nav.Link onClick={() => setShowHelpModal(true)}>Help</Nav.Link>
-            </Nav>
-            <Navbar.Text>
-              <a href="https://ko-fi.com/Q5Q0GUWTY" target="_blank">
-                <img
-                  height="36"
-                  style={{ border: 0, height: 36 }}
-                  src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
-                  border="0"
-                  alt="Buy Me a Coffee at ko-fi.com"
-                />
-              </a>
-            </Navbar.Text>
-          </Navbar.Collapse>
+          <Container>
+            <Navbar.Brand>
+              <img
+                alt=""
+                src={Logo}
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />{" "}
+              FAB Eco Proxy
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto me-auto">
+                <Nav.Link onClick={() => setShowSearchModal(true)}>
+                  Add Cards
+                </Nav.Link>
+                <Nav.Link onClick={() => window.print()}>Print</Nav.Link>
+                <Nav.Link onClick={() => setShowHelpModal(true)}>Help</Nav.Link>
+              </Nav>
+              <Nav className="d-flex">
+                <Navbar.Text className="justify-content-end">
+                  <a
+                    href="https://ko-fi.com/Q5Q0GUWTY"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      style={{ border: 0, height: 36 }}
+                      src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
+                      alt="Buy Me a Coffee at ko-fi.com"
+                    />
+                  </a>
+                </Navbar.Text>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
         </Navbar>
 
         <Modal
@@ -263,10 +244,8 @@ function App() {
                   rel="noreferrer"
                 >
                   <img
-                    height="36"
                     style={{ border: 0, height: 36 }}
                     src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
-                    border="0"
                     alt="Buy Me a Coffee at ko-fi.com"
                   />
                 </a>
