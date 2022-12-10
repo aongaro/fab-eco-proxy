@@ -251,17 +251,13 @@ function App() {
           </Col>
           <Col md="6">
             <p>
-              If you liked this project (which is totally free), you can:{" "}
+              If you liked this project (which is totally free), you can{" "}
               <a
                 href="https://ko-fi.com/Q5Q0GUWTY"
                 target="_blank"
                 rel="noreferrer"
               >
-                <img
-                  style={{ border: 0, height: 36 }}
-                  src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
-                  alt="Buy Me a Coffee at ko-fi.com"
-                />
+                buy me a coffee
               </a>
             </p>
           </Col>
