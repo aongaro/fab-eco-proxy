@@ -18,18 +18,20 @@ import sortBy from "lodash/sortBy";
 import FABCardSearch from "./components/FABCardSearch";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { cardsFromQueryParamsList } from "./db/cardDB";
+import { CardsDB } from "./db/cardDB";
 import EcoProxyCard from "./db/interfaces";
 import Logo from "./images/logopng.png";
+import FABListInput from "./components/FABListInput";
+import { Card as FabCard } from "fab-cards";
 
 function App() {
   const [cardsToPrint, setCardsToPrint] = useState<EcoProxyCard[]>(() =>
-    cardsFromQueryParamsList("id")
+    CardsDB.getInstance().getCardsFromQueryParams("id")
   );
-  const addCardToPrint = (card: EcoProxyCard) => {
-    card = { ...card, uuid: uuidv4() };
+  const addCardToPrint = (card: FabCard) => {
+    const ecocard: EcoProxyCard = { ...card, uuid: uuidv4() };
     setCardsToPrint((prev) => {
-      return sortBy([...prev, card], [(card) => card.name]);
+      return sortBy([...prev, ecocard], [(card) => card.name]);
     });
     toast.success("Card added!");
   };
@@ -41,8 +43,14 @@ function App() {
     });
   };
 
+  const addFromList = (cards: EcoProxyCard[]) => {
+    setCardsToPrint(cards);
+    toast.success("Cards added!");
+  };
+
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showInputModal, setShowInputModal] = useState(false);
   return (
     <>
       <ToastContainer
@@ -84,6 +92,9 @@ function App() {
                 </Nav.Link>
                 <Nav.Link onClick={() => window.print()}>Print</Nav.Link>
                 <Nav.Link onClick={() => setShowHelpModal(true)}>Help</Nav.Link>
+                <Nav.Link onClick={() => setShowInputModal(true)}>
+                  List
+                </Nav.Link>
               </Nav>
               <Nav className="d-flex">
                 <Navbar.Text className="justify-content-end">
@@ -150,7 +161,22 @@ function App() {
             </p>
           </Modal.Body>
         </Modal>
-
+        {showInputModal && (
+          <Modal
+            show={showInputModal}
+            onHide={() => setShowInputModal(false)}
+            aria-labelledby="search-modal-title"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="search-modal-title">
+                Add cards from list
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <FABListInput addCardsFromList={(cards) => addFromList(cards)} />
+            </Modal.Body>
+          </Modal>
+        )}
         <div className="main">
           {cardsToPrint.length > 0 && (
             <Alert

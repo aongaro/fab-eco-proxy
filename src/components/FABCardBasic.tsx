@@ -34,7 +34,11 @@ export default function FABCardBasic({ card }: { card: EcoProxyCard }) {
       <ListGroup.Item
         as="li"
         className="d-flex justify-content-between align-items-start"
-        style={{ height: "150px", overflow: "hidden" }}
+        style={{
+          height: "150px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
       >
         <div>
           <div style={{ fontSize: 10, padding: 2 }}>

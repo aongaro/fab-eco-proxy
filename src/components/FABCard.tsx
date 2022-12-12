@@ -15,9 +15,7 @@ export default function FABCard(props: FABCardProps) {
   const { card, addCardToPrint, removeCardToPrint, fromSearch } = props;
   const editions = card.setIdentifiers.join(", ");
   const ellipsedEd =
-    editions.length > 22 && !fromSearch
-      ? `${editions.substring(0, 22)}...`
-      : editions;
+    editions.length > 22 ? `${editions.substring(0, 22)}...` : editions;
   const ellipsedName =
     card.name.length > 22 && !fromSearch
       ? `${card.name.substring(0, 22)}...`
