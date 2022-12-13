@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Badge } from "react-bootstrap";
 import EcoProxyCard from "../db/interfaces";
 import FABCardBasic from "./FABCardBasic";
 import FABPrintCard from "./FABPrintCard";
@@ -9,10 +9,12 @@ interface FABCardProps {
   removeCardToPrint?: (card: EcoProxyCard) => void;
   addCardToPrint: (card: EcoProxyCard) => void;
   fromSearch?: boolean;
+  quantity?: number;
 }
 
 export default function FABCard(props: FABCardProps) {
-  const { card, addCardToPrint, removeCardToPrint, fromSearch } = props;
+  const { card, addCardToPrint, removeCardToPrint, fromSearch, quantity } =
+    props;
   const editions = card.setIdentifiers.join(", ");
   const ellipsedEd =
     editions.length > 22 ? `${editions.substring(0, 22)}...` : editions;
@@ -30,29 +32,35 @@ export default function FABCard(props: FABCardProps) {
         <Card.Text>{"(" + ellipsedEd + ")"}</Card.Text>
       </Card.Body>
       <Card.Footer className="no-print">
-        {addCardToPrint && (
-          <Button
-            variant="outline-primary"
-            size="sm"
-            style={{ marginRight: 5 }}
-            onClick={() => addCardToPrint(card)}
-          >
-            Add
-          </Button>
-        )}
-        {removeCardToPrint && (
-          <Button
-            variant="outline-danger"
-            size="sm"
-            onClick={() => {
-              if (removeCardToPrint) {
-                removeCardToPrint(card);
-              }
-            }}
-          >
-            Remove
-          </Button>
-        )}
+        <div className="d-flex justify-content-between align-items-center">
+          {addCardToPrint && (
+            <Button
+              variant="outline-primary"
+              size="sm"
+              onClick={() => addCardToPrint(card)}
+            >
+              Add
+            </Button>
+          )}
+          {fromSearch && quantity && (
+            <Badge bg="success" style={{ fontSize: "0.8rem" }}>
+              {quantity}
+            </Badge>
+          )}
+          {removeCardToPrint && (
+            <Button
+              variant="outline-danger"
+              size="sm"
+              onClick={() => {
+                if (removeCardToPrint) {
+                  removeCardToPrint(card);
+                }
+              }}
+            >
+              Remove
+            </Button>
+          )}
+        </div>
       </Card.Footer>
     </Card>
   );

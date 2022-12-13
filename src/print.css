@@ -9,9 +9,14 @@
 	  min-width: 300px !important;
 	  max-width: 100% !important;
 	}
-	html, body {
+	html, body, #root {
 	  height: auto;
 	  margin: 0;
+	}
+	.app-content {
+		width: 100%;
+		height: auto;
+		display: block;
 	}
 	@page {
 		size: auto !important;
@@ -37,6 +42,7 @@
 	  }
 	  .main {
 		margin-top: 0;
+		padding-top: 0;
 		margin-bottom: 0;
 	  }
 	  .card-list .fab-card {
@@ -52,10 +58,10 @@
 		
 	  }
 	  .card-list .fab-card>.dis {
-		/* width: 2.4375in;
-		height: 3.4375in; */
-		width: 235px;
-		  height: 329px;
+		width: 2.4375in;
+		height: 3.4375in;
+		/* width: 235px;
+		  height: 329px; */
 		margin: 0;
 		display:inline-block;
 		border: 1px solid grey;

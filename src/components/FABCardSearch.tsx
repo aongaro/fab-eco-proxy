@@ -7,10 +7,11 @@ import { Card } from "fab-cards";
 
 interface FABCardSearchProps {
   addCardToPrint: (card: EcoProxyCard) => void;
+  addedCards: EcoProxyCard[];
 }
 
 export default function FABCardSearch(props: FABCardSearchProps) {
-  const { addCardToPrint } = props;
+  const { addCardToPrint, addedCards } = props;
   const [searchTerm, setSearchTerm] = useState("fyen");
   // const [results, setResults] = useState<Index.Result[]>([]);
   const [results, setResults] = useState<Card[]>([]);
@@ -25,6 +26,14 @@ export default function FABCardSearch(props: FABCardSearchProps) {
     const res = CardsDB.getInstance().searchCards(searchTerm.trim());
     setResults(res);
   }, [searchTerm]);
+
+  const idCountMap = addedCards.reduce((res, card) => {
+    let quantity = 0;
+    if (res[card.cardIdentifier]) {
+      quantity += res[card.cardIdentifier];
+    }
+    return { ...res, [card.cardIdentifier]: quantity + 1 };
+  }, {} as { [x: string]: number });
 
   return (
     <div className="card-search">
@@ -48,6 +57,7 @@ export default function FABCardSearch(props: FABCardSearchProps) {
                 card={res}
                 addCardToPrint={addCardToPrint}
                 fromSearch={true}
+                quantity={idCountMap[res.cardIdentifier]}
               />
             </Col>
           ))}
