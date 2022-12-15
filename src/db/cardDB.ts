@@ -43,14 +43,18 @@ export class CardsDB {
 
   public searchCards(query: string): Card[] {
     const parts = query.split(" ");
+    const orQuery = parts.reduce((queryParts, part) => {
+      return [...queryParts, { setIdentifiers: part }, { name: part }];
+    }, [] as { [x: string]: string }[]);
     return this.db
       .search<Card>(
         {
           $and: [
             {
               $or: [
-                ...parts.map((part) => ({ setIdentifiers: part })),
-                ...parts.map((part) => ({ name: part })),
+                // ...parts.map((part) => ({ setIdentifiers: part })),
+                // ...parts.map((part) => ({ name: part })),
+                ...orQuery,
               ],
             },
           ],

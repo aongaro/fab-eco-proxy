@@ -27,6 +27,7 @@ import HelpModal from "./components/HelpModal";
 import SearchModal from "./components/SearchModal";
 import * as Icon from "react-bootstrap-icons";
 import LandingCards from "./components/LandingCards";
+import Kofi from "./images/kofi.png";
 
 function App() {
   const [cardsToPrint, setCardsToPrint] = useState<EcoProxyCard[]>(() =>
@@ -112,8 +113,8 @@ function App() {
                       rel="noreferrer"
                     >
                       <img
-                        style={{ border: 0, height: 36 }}
-                        src="https://storage.ko-fi.com/cdn/kofi5.png?v=3"
+                        style={{ border: 0, height: 25 }}
+                        src={Kofi}
                         alt="Buy Me a Coffee at ko-fi.com"
                       />
                     </a>
@@ -197,7 +198,7 @@ function App() {
                       onClick={() => setShowSearchModal(true)}
                     >
                       <div className="d-flex justify-content-center align-items-center">
-                        <Icon.PlusCircle size={15} />
+                        <Icon.Search size={15} />
                       </div>
                     </Button>
                     <Button

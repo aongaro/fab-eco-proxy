@@ -36,7 +36,7 @@ export default function LandingCards() {
           <Col md="3">
             <Card>
               <Card.Body className="d-flex flex-column justify-content-center align-items-center">
-                <Icon.GlobeEuropeAfrica size="45" className="mb-1" />
+                <Icon.GlobeEuropeAfrica size="45" />
                 <div>
                   <p className="mb-1 mt-1 fs-6">LESS INK</p>
                   <p className="mb-1 fs-6">=</p>
@@ -47,22 +47,24 @@ export default function LandingCards() {
           </Col>
         </Row>
       </Container>
-      <div style={{ textAlign: "left" }}>
-        <h3>Usage</h3>
+      <Container>
+        <div style={{ textAlign: "left" }}>
+          <h3>Usage</h3>
 
-        <ol>
-          <li>
-            Click "Add Cards" and enter card names in the search field. Then
-            click "Add" on the cards you wish to print.
-          </li>
-          <li>Or you can click "Import List" to import cards from a list.</li>
-          <li>Adjust cards quantity.</li>
-          <li>
-            Print using your browsers print fuctionality (landscape for US
-            Letter, portrait for A4) or click "Print".
-          </li>
-        </ol>
-      </div>
+          <ol>
+            <li>
+              Click "Add Cards" and enter card names in the search field. Then
+              click "Add" on the cards you wish to print.
+            </li>
+            <li>Or you can click "Import List" to import cards from a list.</li>
+            <li>Adjust cards quantity.</li>
+            <li>
+              Print using your browsers print fuctionality (landscape for US
+              Letter, portrait for A4) or click "Print".
+            </li>
+          </ol>
+        </div>
+      </Container>
     </>
   );
 }

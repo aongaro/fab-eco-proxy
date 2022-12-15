@@ -64,9 +64,24 @@ code {
 
 
 .search-modal {
-  width: 90%;
+  width: 80vw;
   max-width: none!important;
 }
+
+@media (min-width: 768px) {
+  .search-modal {
+    width: 90vw;
+    max-width: none!important;
+  }
+}
+
+@media (min-width: 992px) {
+  .search-modal {
+    width: 80vw;
+    max-width: none!important;
+  }
+}
+
 
 .App {
   width: 100%;

@@ -12,7 +12,7 @@ interface FABCardManagerProps {
   onRemoveAll: () => void;
 }
 
-function ColorIcon({ pitch }: { pitch?: number }) {
+export function ColorIcon({ pitch }: { pitch?: number }) {
   return (
     <>
       {pitch !== undefined && pitch === 1 && (

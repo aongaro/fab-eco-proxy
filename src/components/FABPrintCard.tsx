@@ -85,9 +85,9 @@ export default function FABCardContent({ card }: { card: EcoProxyCard }) {
               children={card.functionalText}
               remarkPlugins={[remarkGfm]}
               components={{
-                p: ({ node, ...props }) => (
-                  <p style={{ marginBottom: 5 }} {...props} />
-                ),
+                p: ({ node, ...props }) => {
+                  return <p style={{ marginBottom: 5 }} {...props} />;
+                },
               }}
             />
           )}
