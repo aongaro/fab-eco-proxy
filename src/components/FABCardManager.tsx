@@ -2,6 +2,7 @@ import React from "react";
 import { ListGroup, Modal, Button } from "react-bootstrap";
 import EcoProxyCard from "../db/interfaces";
 import * as Icon from "react-bootstrap-icons";
+import { getCardsQuantityById } from "../utils";
 
 interface FABCardManagerProps {
   cards: EcoProxyCard[];
@@ -33,13 +34,7 @@ export function ColorIcon({ pitch }: { pitch?: number }) {
 export default function FABCardManager(props: FABCardManagerProps) {
   const { cards, onAdd, onRemove, show, onHide, onRemoveAll } = props;
 
-  const toRender = cards.reduce((res, card) => {
-    let quantity = 0;
-    if (res[card.cardIdentifier]) {
-      quantity += res[card.cardIdentifier].count;
-    }
-    return { ...res, [card.cardIdentifier]: { card, count: quantity + 1 } };
-  }, {} as { [x: string]: { card: EcoProxyCard; count: number } });
+  const toRender = getCardsQuantityById(cards);
   return (
     <Modal
       show={show}

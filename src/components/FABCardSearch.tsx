@@ -15,6 +15,7 @@ import { Card } from "fab-cards";
 import FABCardsListItem from "./FABCardSearchListItemt";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import * as Icon from "react-bootstrap-icons";
+import { getCardsQuantityById } from "../utils";
 
 interface FABCardSearchProps {
   addCardToPrint: (card: EcoProxyCard) => void;
@@ -45,13 +46,7 @@ export default function FABCardSearch(props: FABCardSearchProps) {
     setResults(res);
   }, [searchTerm]);
 
-  const idCountMap = addedCards.reduce((res, card) => {
-    let quantity = 0;
-    if (res[card.cardIdentifier]) {
-      quantity += res[card.cardIdentifier];
-    }
-    return { ...res, [card.cardIdentifier]: quantity + 1 };
-  }, {} as { [x: string]: number });
+  const idCountMap = getCardsQuantityById(addedCards);
 
   return (
     <div className="card-search">
@@ -111,7 +106,11 @@ export default function FABCardSearch(props: FABCardSearchProps) {
                   card={res}
                   addCardToPrint={addCardToPrint}
                   fromSearch={true}
-                  quantity={idCountMap[res.cardIdentifier]}
+                  quantity={
+                    idCountMap[res.cardIdentifier]
+                      ? idCountMap[res.cardIdentifier].count
+                      : undefined
+                  }
                 />
               </Col>
             ))}
@@ -124,7 +123,11 @@ export default function FABCardSearch(props: FABCardSearchProps) {
                 key={res.cardIdentifier}
                 card={res}
                 addCardToPrint={addCardToPrint}
-                quantity={idCountMap[res.cardIdentifier]}
+                quantity={
+                  idCountMap[res.cardIdentifier]
+                    ? idCountMap[res.cardIdentifier].count
+                    : undefined
+                }
               />
             ))}
           </ListGroup>
