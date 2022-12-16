@@ -44,7 +44,7 @@ export default function FABCardManager(props: FABCardManagerProps) {
       <Modal.Header closeButton>
         <Modal.Title id="search-modal-title">Manage</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body style={{ maxHeight: "80vh", overflow: "auto" }}>
         <ListGroup variant="flush">
           {Object.keys(toRender).map((cardId) => (
             <ListGroup.Item

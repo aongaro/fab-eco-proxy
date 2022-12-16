@@ -9,6 +9,7 @@ import {
   Nav,
   Navbar,
   Row,
+  Badge,
 } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
@@ -98,7 +99,10 @@ function App() {
                     Add Cards
                   </Nav.Link>
                   <Nav.Link onClick={() => setShowInputModal(true)}>
-                    Import List
+                    Import List{" "}
+                    <Badge bg="warning" text="dark">
+                      Beta
+                    </Badge>
                   </Nav.Link>
                   <Nav.Link onClick={() => window.print()}>Print</Nav.Link>
                   <Nav.Link onClick={() => setShowHelpModal(true)}>

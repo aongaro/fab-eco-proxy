@@ -57,7 +57,7 @@ export default function FABCardContent({ card }: { card: EcoProxyCard }) {
                     ? "4px solid yellow"
                     : "4px solid blue"
                   : "4px solid red"
-                : "none",
+                : "4px solid white",
           }}
         >
           <strong>{card.name}</strong>
