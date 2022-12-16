@@ -4,14 +4,31 @@
 	  max-width: 100% !important;
 	  -webkit-print-color-adjust:exact !important;
 	print-color-adjust:exact !important;
+	page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	}
 	.container {
 	  min-width: 300px !important;
 	  max-width: 100% !important;
+	  page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	}
-	html, body {
+	html, body, #root {
 	  height: auto;
 	  margin: 0;
+	  page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
+	}
+	.app-content {
+		width: 100%;
+		height: auto;
+		display: block;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	}
 	@page {
 		size: auto !important;
@@ -21,6 +38,9 @@
 		margin-right: 0;
 		-webkit-print-color-adjust:exact !important;
 	  print-color-adjust:exact !important;
+	  page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	  }
 	  .App-header {
 		display: none;
@@ -37,7 +57,13 @@
 	  }
 	  .main {
 		margin-top: 0;
+		padding-top: 0;
+		margin-bottom: 0;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	  }
+	 
 	  .card-list .fab-card {
 		margin: 0;
 		padding: 0;
@@ -47,26 +73,43 @@
 		height: 329px; */
 		border: none;
 		page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 		display:inline-block;
 		
 	  }
 	  .card-list .fab-card>.dis {
-		/* width: 2.4375in;
-		height: 3.4375in; */
-		width: 235px;
-		  height: 329px;
+		width: 2.4375in;
+		height: 3.4375in;
+		/* width: 235px;
+		height: 329px; */
 		margin: 0;
 		display:inline-block;
 		border: 1px solid grey;
 		vertical-align: bottom;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	  }
 	  .card-list {
 		margin: 0;
 		padding: 0;
 		font-size: 0;
 		text-align: left;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		break-before: avoid;
 	  }
 	  .fab-card.card {
 		background-color: transparent;
+		border: none;
+	  }
+	  .row {
+		margin: 0;
+		padding: 0;
+	  }
+	  .col {
+		margin: 0;
+		padding: 0;
 	  }
   }

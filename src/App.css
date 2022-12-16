@@ -2,6 +2,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+#root {
+  height: 100%;
+}
+
+.app-content {
+  height: 100%;
+  height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .title {
   margin-bottom: 10px;
@@ -53,16 +64,32 @@ code {
 
 
 .search-modal {
-  width: 90%;
+  width: 80vw;
   max-width: none!important;
 }
+
+@media (min-width: 768px) {
+  .search-modal {
+    width: 90vw;
+    max-width: none!important;
+  }
+}
+
+@media (min-width: 992px) {
+  .search-modal {
+    width: 80vw;
+    max-width: none!important;
+  }
+}
+
 
 .App {
   width: 100%;
 }
 
 .main {
-  margin-top: 70px;
+  padding-top: 80px;
+  /* margin-bottom: 130px; */
   text-align: center;
 }
 
@@ -155,6 +182,12 @@ code {
   width: 60px;
   height: 40px;
   font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fab-stat {
   display: flex;
   justify-content: center;
   align-items: center;
