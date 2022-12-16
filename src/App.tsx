@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Alert,
-  Card,
   Button,
   Col,
   Container,
@@ -230,26 +229,10 @@ function App() {
                   ))}
                 </div>
                 {cardsToPrint.length === 0 && (
-                  <Card style={{ width: "100%" }}>
-                    <Card.Body>
-                      <LandingCards />
-                      <div className="d-flex justify-content-center align-items-start">
-                        <Button
-                          variant="primary"
-                          style={{ marginRight: 10 }}
-                          onClick={() => setShowSearchModal(true)}
-                        >
-                          Add Cards
-                        </Button>
-                        <Button
-                          variant="primary"
-                          onClick={() => setShowInputModal(true)}
-                        >
-                          Import List
-                        </Button>
-                      </div>
-                    </Card.Body>
-                  </Card>
+                  <LandingCards
+                    onAdd={() => setShowSearchModal(true)}
+                    onList={() => setShowInputModal(true)}
+                  />
                 )}
               </Col>
             </Row>
