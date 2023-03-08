@@ -15,7 +15,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/uuid": "^9.0.0",
     "bootstrap": "^5.2.3",
-    "fab-cards": "^6.0.8",
+    "fab-cards": "^7.1.58",
     "fuse.js": "^6.6.2",
     "lodash": "^4.17.21",
     "lunr": "^2.3.9",
