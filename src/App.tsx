@@ -21,7 +21,7 @@ import { CardsDB } from "./db/cardDB";
 import EcoProxyCard from "./db/interfaces";
 import Logo from "./images/logopng.png";
 import FABListInput from "./components/FABListInput";
-import { Card as FabCard } from "fab-cards";
+import { Card as FabCard } from "@flesh-and-blood/types";
 import FABCardManager from "./components/FABCardManager";
 import HelpModal from "./components/HelpModal";
 import SearchModal from "./components/SearchModal";

@@ -11,7 +11,7 @@ import {
   Row,
 } from "react-bootstrap";
 import EcoProxyCard from "../db/interfaces";
-import { Card } from "fab-cards";
+import { Card } from "@flesh-and-blood/types";
 import FABCardsListItem from "./FABCardSearchListItemt";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import * as Icon from "react-bootstrap-icons";
