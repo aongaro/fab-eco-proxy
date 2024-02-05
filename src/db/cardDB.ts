@@ -1,4 +1,5 @@
-import { Card, cards } from "fab-cards";
+import { cards } from "@flesh-and-blood/cards";
+import { Card } from "@flesh-and-blood/types";
 import { v4 as uuidv4 } from "uuid";
 import EcoProxyCard from "./interfaces";
 import Fuse from "fuse.js";

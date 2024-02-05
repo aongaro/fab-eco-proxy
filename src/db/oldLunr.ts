@@ -1,5 +1,5 @@
 import lunr from "lunr";
-import { cards } from "fab-cards";
+import { cards } from "@flesh-and-blood/cards";
 import { v4 as uuidv4 } from "uuid";
 import EcoProxyCard from "./interfaces";
 import sortBy from "lodash/sortBy";
