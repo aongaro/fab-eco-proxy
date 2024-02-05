@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/fab-eco-proxy/static/css/main.0ba2fb1c.css",
-    "main.js": "/fab-eco-proxy/static/js/main.c095f69a.js",
+    "main.js": "/fab-eco-proxy/static/js/main.e9d05bd7.js",
     "static/js/787.a8ff425a.chunk.js": "/fab-eco-proxy/static/js/787.a8ff425a.chunk.js",
     "static/media/logopng.png": "/fab-eco-proxy/static/media/logopng.6b3c8eb60566c764634e.png",
     "static/media/preview.png": "/fab-eco-proxy/static/media/preview.f0ccb270d955011b7084.png",
@@ -11,11 +11,11 @@
     "static/media/pitch-1.png": "/fab-eco-proxy/static/media/pitch-1.aaae6be09971500e0ae5.png",
     "index.html": "/fab-eco-proxy/index.html",
     "main.0ba2fb1c.css.map": "/fab-eco-proxy/static/css/main.0ba2fb1c.css.map",
-    "main.c095f69a.js.map": "/fab-eco-proxy/static/js/main.c095f69a.js.map",
+    "main.e9d05bd7.js.map": "/fab-eco-proxy/static/js/main.e9d05bd7.js.map",
     "787.a8ff425a.chunk.js.map": "/fab-eco-proxy/static/js/787.a8ff425a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0ba2fb1c.css",
-    "static/js/main.c095f69a.js"
+    "static/js/main.e9d05bd7.js"
   ]
 }
